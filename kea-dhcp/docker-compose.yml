@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  kea:
+    image: kea-dhcp:1.5
+    ports:
+      - 67:67
+    depends_on:
+      - kea-postgres
+    volumes:
+      - ./conf/kea/kea-dhcp.sample.conf:/usr/local/etc/kea/kea-dhcp4.conf
+      - ./conf/kea/kea-dhcp-ddns.sample.conf:/usr/local/etc/kea/kea-dhcp-ddns.conf
+      - ./conf/kea/kea-ctrl-agent.sample.conf:/usr/local/etc/kea/kea-ctrl-agent.conf
+    restart: always
+
+  kea-postgres:
+    image: kea-dhcp-postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres123
+    ports:
+      - 5432:5432
+    restart: always

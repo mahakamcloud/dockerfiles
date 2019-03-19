@@ -43,9 +43,11 @@ RUN apt-get update && apt-get install -y \
     libboost-dev \
     libboost-system-dev \
     libpq-dev \
-    liblog4cplus-dev && \
+    liblog4cplus-dev \
+    supervisor && \
     mkdir -p /usr/local/var/run/kea && \
-    mkdir -p /usr/local/var/kea/
+    mkdir -p /usr/local/var/kea/ && \
+    mkdir -p /var/log/supervisor
 COPY --from=builder /usr/local/include/kea/ /usr/local/include/kea/
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 COPY --from=builder /usr/local/sbin/kea* /usr/local/sbin/
@@ -55,9 +57,9 @@ COPY --from=builder /usr/local/share/kea/ /usr/local/share/kea/
 COPY --from=builder /usr/local/share/doc/kea/ /usr/local/share/doc/kea/
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
-ENTRYPOINT ["/usr/local/sbin/kea-dhcp4"]
-CMD ["-c", "/usr/local/etc/kea/kea-dhcp4.conf"]
-# EXPOSE dhcp port
+COPY ./conf/supervisor/kea-dhcp.conf /etc/supervisor/conf.d/
+CMD ["/usr/bin/supervisord"]
+
 # check DHCP bind ip
 
 FROM postgres:11.2-alpine as kea-dhcp-postgres
