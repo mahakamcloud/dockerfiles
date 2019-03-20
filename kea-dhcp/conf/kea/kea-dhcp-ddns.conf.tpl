@@ -33,7 +33,7 @@
   "loggers": [
     {
         // This specifies the logging for D2 (DHCP-DDNS) daemon.
-        "name": {{ key "/dhcpddns/logger/name" }},
+        "name": {{ keyOrDefault "/dhcpddns/logger/name" "dhcpddns" }},
         "output_options": [
             {
                 // Specifies the output file. There are several special values
@@ -43,7 +43,7 @@
                 // - syslog (logs to syslog)
                 // - syslog:name (logs to syslog using specified name)
                 // Any other value is considered a name of a time
-                "output": "{{ key "/dhcpddns/logger/output" }}"
+                "output": "{{ keyOrDefault "/dhcpddns/logger/output" "stdout" }}"
                 // "output": "stdout"
 
                 // This governs whether the log output is flushed to disk after
@@ -60,12 +60,12 @@
         ],
         // This specifies the severity of log messages to keep. Supported values
         // are: FATAL, ERROR, WARN, INFO, DEBUG
-        "severity": "{{ key "/dhcpddns/logger/severity" }}",
+        "severity": "{{ keyOrDefault "/dhcpddns/logger/severity" "INFO" }}",
 
         // If DEBUG level is specified, this value is used. 0 is least verbose,
         // 99 is most verbose. Be cautious, Kea can generate lots and lots
         // of logs if told to do so.
-        "debuglevel": {{ key "/dhcpddns/logger/debuglevel" }}
+        "debuglevel": {{ keyOrDefault "/dhcpddns/logger/debuglevel" "0" }}
     }
   ]
 }
