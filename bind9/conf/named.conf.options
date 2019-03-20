@@ -1,0 +1,19 @@
+options {
+  directory "/var/cache/bind";
+
+  recursion yes;
+  allow-recursion { any; }; // (?)
+  listen-on { 127.0.0.1; }; // change to VM IP
+  allow-transfer { none; };
+  zone-statistics yes;
+
+  forwarders {
+    8.8.8.8;
+    8.8.4.4;
+    1.1.1.1;
+  };
+};
+
+statistics-channels {
+  inet 127.0.0.1 port 8080;
+};

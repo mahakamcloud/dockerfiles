@@ -1,0 +1,11 @@
+zone "mahakam.vpc" {
+  type master;
+  file "/var/lib/bind/zones/db.mahakam.vpc";
+  allow-update { 127.0.0.1; }; // change to DNS IP
+};
+
+zone "32.10.in-addr.arpa" { // we need to change to CIDR
+  type master;
+  file "/var/lib/bind/zones/db.10.32";
+  allow-update { 127.0.0.1; };
+};

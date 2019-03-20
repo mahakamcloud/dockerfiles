@@ -1,0 +1,14 @@
+$ORIGIN mahakam.vpc.
+$TTL 86400
+
+@       IN      SOA     ns1.mahakam.vpc.      cf.go-jek.com. (
+                        2019032001    ; serial number YYMMDDNN
+                        28800           ; Refresh
+                        7200            ; Retry
+                        864000          ; Expire
+                        86400           ; Min TTL
+            )
+
+                NS      ns1.mahakam.vpc. 
+
+ns1				A		127.0.0.1
