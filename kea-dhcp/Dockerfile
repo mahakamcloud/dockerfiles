@@ -40,6 +40,7 @@ RUN wget https://ftp.isc.org/isc/kea/1.5.0/kea-1.5.0.tar.gz -O - | tar -xz && \
 
 FROM ubuntu:bionic as kea-dhcp
 RUN apt-get update && apt-get install -y \
+    inotify-tools \
     libboost-dev \
     libboost-system-dev \
     libpq-dev \
@@ -55,6 +56,7 @@ COPY --from=builder /usr/local/etc/kea/ /usr/local/etc/kea/
 COPY --from=builder /usr/local/lib/ /usr/local/lib/
 COPY --from=builder /usr/local/share/kea/ /usr/local/share/kea/
 COPY --from=builder /usr/local/share/doc/kea/ /usr/local/share/doc/kea/
+COPY ./watch_dhcp_conf.sh /watch_dhcp_conf.sh
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
 COPY ./conf/supervisor/kea-dhcp.conf /etc/supervisor/conf.d/
