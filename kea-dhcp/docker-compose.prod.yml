@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  kea:
+    image: mahakamcloud/kea-dhcp:0.1.0
+    ports:
+      - 67:67
+      - 8080:8080
+    depends_on:
+      - kea-postgres
+    volumes:
+      - /opt/kea-config/kea-dhcp.conf:/usr/local/etc/kea/kea-dhcp4.conf
+      - /opt/kea-config/kea-dhcp-ddns.conf:/usr/local/etc/kea/kea-dhcp-ddns.conf
+      - /opt/kea-config/kea-ctrl-agent.conf:/usr/local/etc/kea/kea-ctrl-agent.conf
+    restart: always
+
+  kea-postgres:
+    image: mahakamcloud/kea-dhcp-postgres:0.1.0
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 5432:5432
+    restart: always
+
+  consul:
+    image: consul:1.4.4
+    ports: 
+      - 8500:8500
