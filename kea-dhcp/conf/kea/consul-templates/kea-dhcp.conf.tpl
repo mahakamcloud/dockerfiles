@@ -437,7 +437,7 @@
         // This section affects kea-dhcp4, which is the base logger for DHCPv4
         // component. It tells DHCPv4 server to write all log messages (on
         // severity INFO or more) to a file.
-        "name": {{ keyOrDefault "/dhcp4/logger/name" "dhcp4" }},
+        "name": "{{ keyOrDefault "/dhcp4/logger/name" "dhcp4" }}",
         "output_options": [
             {
                 // Specifies the output file. There are several special values
