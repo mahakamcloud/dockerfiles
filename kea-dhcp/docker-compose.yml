@@ -7,6 +7,7 @@ services:
       - 67:67
     depends_on:
       - kea-postgres
+    network_mode: host
     volumes:
       - ./conf/kea/kea-dhcp.sample.conf:/usr/local/etc/kea/kea-dhcp4.conf
       - ./conf/kea/kea-dhcp-ddns.sample.conf:/usr/local/etc/kea/kea-dhcp-ddns.conf
