@@ -11,7 +11,7 @@ fi
 
 while :
 do
-	while inotifywait -e modify $config_file; do
+	while inotifywait -e access $config_file; do
 		$process_name -t $config_file
 		status=$?
 		echo $status
