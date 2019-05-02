@@ -2,7 +2,7 @@ version: '3'
 
 services:
   kea:
-    image: mahakamcloud/kea-dhcp:0.1.0
+    image: mahakamcloud/kea-dhcp:0.1.2
     ports:
       - 67:67
       - 8080:8080
